@@ -12,6 +12,5 @@ Basic algorithm to match students with their courses.
 	- match everyone remaining in the list with the course and mark them as matched
 - repeat for second, third, ... choice
 
-This Algorithm only works for a basic situration.
-An example is a project week at a school:
-Students have to choose one project they want to participate in. The projects all have a size limit, which is why there needs to be a voting system. Usually students then get to pick their first, second and third choice.
+This Algorithm only works for a basic situration. An example is a project week at a school:
+> Students have to choose one project they want to participate in. The projects all have a size limit, which is why there needs to be a voting system. Usually students then get to pick their first, second and third choice.
