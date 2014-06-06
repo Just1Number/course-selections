@@ -1,10 +1,31 @@
 from random import randint
+import sys, getopt
 # simple examples for testing:
 # votelist=[
 #     ["a", "a", "a", "a", "a", "a", "b", "a", "a", "a", "a", "b", "a", "a", "a", "a", "b", "b", "b", "b", "b", "b", "b", "b", "a", "a", "a", "a", "c", "c", "c", "c", "a", "a", "a", "a", "a", "a", "b", "b", "b", "b", "a", "a", "a", "a", "c", "c", "c"],
 #     ["b", "b", "b", "b", "b", "b", "c", "b", "b", "b", "b", "c", "b", "b", "b", "b", "c", "c", "c", "c", "c", "c", "c", "c", "b", "b", "b", "b", "a", "a", "a", "a", "b", "b", "b", "b", "b", "b", "c", "c", "c", "c", "b", "b", "b", "b", "a", "a", "a"]
 #     ]
 # coiceslist=[["a",16],["b",16],["c",16]]
+def main(argv):
+	helpmsg="course-selections -i <sourcefile> -f <first-voting-column> -l <last-voting-column -o <outputfile>"
+	try:
+        opts, args = getopt.getopt(argv,"hi:f:l:o:",["ifile=","ofile="]) #argv is the list of arguments, "hi:o:" means there are the options -h, -i <...>, -o <...>, last parameter discribes long options (--ifile)
+   	except getopt.GetoptError:
+        print(helpmsg)
+        sys.exit(2)
+	for opt, arg in opts:
+	  	if opt == "-h":
+	  		print(helpmsg)
+	  		sys.exit()
+	  	elif opt in ("-i","--ifile"):
+	  		sourcefilepath = arg
+	  	elif opt in ("-o","--ofile"):
+	  		outputfilepath = arg
+	  	elif opt == "-f":
+	  		firstVotingColumn = arg
+	  	elif opt == "-l":
+	  		lastVotingColumn = arg
+
 
 def courseMatchingAlgo(listOfVotelists, listOfCoursesAndMaxMembers):
     """ courseMatchingAlgo discription
@@ -39,3 +60,5 @@ def courseMatchingAlgo(listOfVotelists, listOfCoursesAndMaxMembers):
 
     return matchlist
 
+if __name__ == "__main__":
+   main(sys.argv[1:])
