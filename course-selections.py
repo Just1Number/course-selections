@@ -32,7 +32,7 @@ def courseMatchingAlgo(listOfVotelists, listOfCoursesAndMaxMembers):
     Arguments:
     listOfVotelists: [[string]] A list of lists of the votes 
     	(listOfVotelists[0] is the list of the first votes listOfVotelists[1] of the second votes etc)
-    listOfVotelists: [[string, int]] A list of lists with the lenght of 2. 
+    listOfCoursesAndMaxMembers: [[string, int]] A list of lists with the lenght of 2. 
     	Left element is the name of the Choice and the right is the max size.
     """
     matchlist = [""] * len(listOfVotelists[0])
