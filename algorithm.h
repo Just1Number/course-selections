@@ -1,11 +1,17 @@
 #ifndef ALGORITHM_H
 #define ALGORITHM_H
+#include <vector>
+#include <string>
+#include "messagebox.h"
+#include <QString>
 
-
-class algorithm
+using namespace std;
+class Algorithm
 {
 public:
-    algorithm();
+    Algorithm();
+    void course_matching_algo();
+    vector<string> matchlist;
 };
 
 #endif // ALGORITHM_H

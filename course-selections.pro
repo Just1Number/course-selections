@@ -14,9 +14,12 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    algorithm.cpp
+    algorithm.cpp \
+    messagebox.cpp
 
 HEADERS  += mainwindow.h \
-    algorithm.h
+    algorithm.h \
+    messagebox.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    messagebox.ui
