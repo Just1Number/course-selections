@@ -1,23 +1,25 @@
 #ifndef ALGORITHM_H
 #define ALGORITHM_H
-#include <vector>
+#include <list>
 #include <string>
 #include "messagebox.h"
 #include <QString>
 #include <tuple>
+#include <vector>
 
 using namespace std;
 class Algorithm
 {
     public:
-        Algorithm(
-                vector<vector<string> > listOfVotelists,
-                vector<tuple<string, int> > listOfCoursesAndMaxMembers);
+        Algorithm(vector<list<string> > listOfVotelists,
+                vector<tuple<string, unsigned> > listOfCoursesAndMaxMembers,
+                vector<int> listOfVoterIds);
         void course_matching_algo();
-        vector<string> matchlist;
+        list<string> matchlist;
     private:
-        vector<vector<string>> listOfVotelists;
-        vector<tuple<string,int>> listOfCoursesAndMaxMembers;
+        vector<list<string> > listOfVotelists;
+        vector<tuple<string, unsigned> > listOfCoursesAndMaxMembers;
+        vector<int> listOfVoterIds;
         MessageBox msgbox;
 
 };
