@@ -12,14 +12,14 @@ class Algorithm
 {
     public:
         Algorithm(vector<list<string> > listOfVotelists,
-                vector<tuple<string, unsigned> > listOfCoursesAndMaxMembers,
-                vector<int> listOfVoterIds);
+                vector<tuple<string, unsigned> > listOfCoursesAndMaxMembers);
         void course_matching_algo();
-        list<string> matchlist;
+        vector<string> get_matchlist();
     private:
         vector<list<string> > listOfVotelists;
         vector<tuple<string, unsigned> > listOfCoursesAndMaxMembers;
-        vector<int> listOfVoterIds;
+        list<int> listOfVoterIds;
+        vector<string> matchlist;
         MessageBox msgbox;
 
 };
