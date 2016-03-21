@@ -21,5 +21,4 @@ HEADERS  += mainwindow.h \
     algorithm.h \
     jsontranslator.h
 
-FORMS    += mainwindow.ui \
-    messagebox.ui
+FORMS    += mainwindow.ui
