@@ -1,0 +1,13 @@
+{
+    "simpleString" : "FUCK YEA!",
+    "listOfVotelists" : [
+            ["a", "a", "b", "c", "b"],
+            ["b", "c", "a", "a", "c"],
+            ["a", "b", "c", "b", "a"]
+        ],
+    "listOfCoursesAndMaxMembers" : [
+            {"a": 2},
+            {"b": 3},
+            {"c": 4}
+        ]
+}

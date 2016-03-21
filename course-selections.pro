@@ -15,11 +15,15 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     algorithm.cpp \
-    messagebox.cpp
+    jsontranslator.cpp
 
 HEADERS  += mainwindow.h \
     algorithm.h \
-    messagebox.h
+    jsontranslator.h
 
-FORMS    += mainwindow.ui \
-    messagebox.ui
+FORMS    += mainwindow.ui
+
+DISTFILES += \
+    README.md \
+    course-selections.py \
+    json_test.json
