@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include <QTextBrowser>
-#include "messagebox.h"
+#include <QMessageBox>
 #include "algorithm.h"
 
 namespace Ui {

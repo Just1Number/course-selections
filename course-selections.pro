@@ -15,12 +15,10 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     algorithm.cpp \
-    messagebox.cpp \
     jsontranslator.cpp
 
 HEADERS  += mainwindow.h \
     algorithm.h \
-    messagebox.h \
     jsontranslator.h
 
 FORMS    += mainwindow.ui \

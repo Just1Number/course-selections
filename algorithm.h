@@ -2,7 +2,7 @@
 #define ALGORITHM_H
 #include <list>
 #include <string>
-#include "messagebox.h"
+#include <QMessageBox>
 #include <QString>
 #include <tuple>
 #include <vector>
