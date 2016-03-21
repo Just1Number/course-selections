@@ -1,11 +1,11 @@
 #include "algorithm.h"
 
 Algorithm::Algorithm(
-        vector<list<string> > listOfVotelists,
-        vector<tuple<string, unsigned> > listOfCoursesAndMaxMembers)
+        vector<list<QString> > listOfVotelists,
+        vector<tuple<QString, unsigned> > listOfCoursesAndMaxMembers)
 {
     list<unsigned> sizeList;
-    foreach (list<string> voteList, listOfVotelists) {
+    foreach (list<QString> voteList, listOfVotelists) {
         sizeList.push_back(voteList.size());
     }
     sizeList.sort();
@@ -29,7 +29,7 @@ void Algorithm::course_matching_algo(){
 
             list<int> courseVoters;
             list<int>::iterator voterId = listOfVoterIds.begin();
-            for (list<string>::iterator vote = listOfVotelists[voteRound].begin(); vote != listOfVotelists[voteRound].end(); ++vote) {
+            for (list<QString>::iterator vote = listOfVotelists[voteRound].begin(); vote != listOfVotelists[voteRound].end(); ++vote) {
                 if (*vote == get<0>(listOfCoursesAndMaxMembers[choice] ) ) {
                     courseVoters.push_back(*(voterId) );
                 }
@@ -53,8 +53,8 @@ void Algorithm::course_matching_algo(){
                     ++index;
                 }
                 listOfVoterIds.remove(voter);
-                foreach (list<string> voteList, listOfVotelists) {
-                    list<string>::iterator iter = voteList.begin();
+                foreach (list<QString> voteList, listOfVotelists) {
+                    list<QString>::iterator iter = voteList.begin();
                     advance(iter, index);
                     voteList.erase(iter);
                 }
@@ -63,6 +63,6 @@ void Algorithm::course_matching_algo(){
     }
 }
 
-vector<string> Algorithm::get_matchlist(){
+vector<QString> Algorithm::get_matchlist(){
     return matchlist;
 }

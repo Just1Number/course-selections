@@ -22,3 +22,8 @@ HEADERS  += mainwindow.h \
     jsontranslator.h
 
 FORMS    += mainwindow.ui
+
+DISTFILES += \
+    README.md \
+    course-selections.py \
+    json_test.json

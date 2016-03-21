@@ -5,6 +5,7 @@
 #include <QTextBrowser>
 #include <QMessageBox>
 #include "algorithm.h"
+#include "jsontranslator.h"
 
 namespace Ui {
 class MainWindow;
@@ -24,7 +25,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QTextBrowser textBrowser;
-    MessageBox msgbox;
+    QMessageBox msgbox;
 };
 
 #endif // MAINWINDOW_H
