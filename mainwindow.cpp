@@ -19,8 +19,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
-    ui->textBrowser->setText("Button pressed");
-    QString h = "nein";
-    msgbox.show();
-    msgbox.display_msg(h);
+    JsonTranslator jasy;
+    bool test = jasy.read_file();
+    if(test) ui->textBrowser->setText("reading successful");
 }
