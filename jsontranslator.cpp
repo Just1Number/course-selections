@@ -30,5 +30,13 @@ bool JsonTranslator::read_file() {
         this->listOfVotelists.push_back(votelist);
     }
     // read listOfCoursesAndMaxMembers
+    QJsonArray jListOfCoursesAndMaxMembers = root["listOfCoursesAndMaxMembers"].toArray();
+    for (int listIndex = 0; listIndex < jListOfCoursesAndMaxMembers.size(); ++listIndex) {
+        QJsonObject jCourse = jListOfCoursesAndMaxMembers[listIndex].toObject();
+        QString courseName = jCourse.keys()[0];
+        unsigned maxMembers = jCourse.value(courseName).toInt();
+        std::tuple<QString, unsigned> course (courseName, maxMembers);
+        this->listOfCoursesAndMaxMembers.push_back(course);
+    }
     return true;
 }
