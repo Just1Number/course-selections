@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "algorithm.h"
 #include "jsontranslator.h"
+#include "votingdata.h"
 #include <QApplication>
 #include <QMessageBox>
 

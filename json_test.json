@@ -1,11 +1,11 @@
 {
     "simpleString" : "FUCK YEA!",
-    "listOfVotelists" : [
+    "list_of_votelists" : [
             ["a", "a", "b", "c", "b"],
             ["b", "c", "a", "a", "c"],
             ["a", "b", "c", "b", "a"]
         ],
-    "listOfCoursesAndMaxMembers" : [
+    "list_of_courses_and_max_members" : [
             {"a": 2},
             {"b": 3},
             {"c": 4}

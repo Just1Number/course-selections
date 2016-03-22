@@ -14,16 +14,18 @@
 #include <list>
 #include <tuple>
 
+using namespace std;
+
 class JsonTranslator
 {
 public:
     JsonTranslator();
     bool read_file();
 private:
-    std::vector<std::list<QString> > listOfVotelists;
-    std::vector<std::tuple<QString, unsigned> > listOfCoursesAndMaxMembers;
-    std::list<int> listOfVoterIds;
-    std::vector<QString> matchlist;
+    vector<list<QString> > list_of_votelists;
+    vector<tuple<QString, unsigned> > list_of_courses_and_max_members;
+    list<int> list_of_voter_ids;
+    vector<QString> matchlist;
 };
 
 #endif // JSONTRANSLATOR_H

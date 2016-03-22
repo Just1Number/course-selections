@@ -19,7 +19,15 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
-    JsonTranslator jasy;
-    bool test = jasy.read_file();
-    if(test) ui->textBrowser->setText("reading successful");
+    VotingData voting_data;
+    //voting_data.getMatchlist().push_back("NoWay");
+    vector<QString> matchlist;
+    matchlist.push_back("Pls dont crash");
+    voting_data.setMatchlist(matchlist);
+    QString output = voting_data.getMatchlist()[0];
+    ui->textBrowser->setText(output);
+    voting_data.getMatchlist().push_back("maybe?");
+    output = voting_data.getMatchlist()[0];
+    ui->textBrowser->append(output);
+
 }

@@ -11,32 +11,32 @@ bool JsonTranslator::read_file() {
             qWarning("Couldn't open file.");
             return false;
     }
-    QByteArray saveData = loadFile.readAll();
-    QJsonDocument loadDoc(QJsonDocument::fromJson(saveData) );
-    QJsonObject root = loadDoc.object();
+    QByteArray save_data = loadFile.readAll();
+    QJsonDocument loaded_doc (QJsonDocument::fromJson(save_data) );
+    QJsonObject root = loaded_doc.object();
     QMessageBox msgbox;
     QString simple = root["simpleString"].toString();
     msgbox.setText(simple);
     msgbox.exec();
-    // read listOfVotelists
-    QJsonArray jListOfVotelists = root["listOfVotelists"].toArray();
-    for (int listIndex = 0; listIndex < jListOfVotelists.size(); ++listIndex) {
-        QJsonArray jVotelist = jListOfVotelists[listIndex].toArray();
-        std::list<QString> votelist;
-        for (int voteIndex = 0; voteIndex < jVotelist.size(); ++voteIndex) {
-            QString vote = jVotelist[voteIndex].toString();
+    // read list_of_votelists
+    QJsonArray j_list_of_votelists = root["list_of_votelists"].toArray();
+    for (int list_index = 0; list_index < j_list_of_votelists.size(); ++list_index) {
+        QJsonArray j_votelist = j_list_of_votelists[list_index].toArray();
+        list<QString> votelist;
+        for (int vote_index = 0; vote_index < j_votelist.size(); ++vote_index) {
+            QString vote = j_votelist[vote_index].toString();
             votelist.push_back(vote);
         }
-        this->listOfVotelists.push_back(votelist);
+        this->list_of_votelists.push_back(votelist);
     }
-    // read listOfCoursesAndMaxMembers
-    QJsonArray jListOfCoursesAndMaxMembers = root["listOfCoursesAndMaxMembers"].toArray();
-    for (int listIndex = 0; listIndex < jListOfCoursesAndMaxMembers.size(); ++listIndex) {
-        QJsonObject jCourse = jListOfCoursesAndMaxMembers[listIndex].toObject();
-        QString courseName = jCourse.keys()[0];
-        unsigned maxMembers = jCourse.value(courseName).toInt();
-        std::tuple<QString, unsigned> course (courseName, maxMembers);
-        this->listOfCoursesAndMaxMembers.push_back(course);
+    // read list_of_courses_and_max_members
+    QJsonArray j_list_of_courses_and_max_members = root["list_of_courses_and_max_members"].toArray();
+    for (int list_index = 0; list_index < j_list_of_courses_and_max_members.size(); ++list_index) {
+        QJsonObject j_course = j_list_of_courses_and_max_members[list_index].toObject();
+        QString course_name = j_course.keys()[0];
+        unsigned max_members = j_course.value(course_name).toInt();
+        tuple<QString, unsigned> course (course_name, max_members);
+        this->list_of_courses_and_max_members.push_back(course);
     }
     return true;
 }

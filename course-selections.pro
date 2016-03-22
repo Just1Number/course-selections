@@ -15,11 +15,13 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     algorithm.cpp \
-    jsontranslator.cpp
+    jsontranslator.cpp \
+    votingdata.cpp
 
 HEADERS  += mainwindow.h \
     algorithm.h \
-    jsontranslator.h
+    jsontranslator.h \
+    votingdata.h
 
 FORMS    += mainwindow.ui
 

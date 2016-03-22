@@ -1,68 +1,68 @@
 #include "algorithm.h"
 
 Algorithm::Algorithm(
-        vector<list<QString> > listOfVotelists,
-        vector<tuple<QString, unsigned> > listOfCoursesAndMaxMembers)
+        vector<list<QString> > list_of_votelists,
+        vector<tuple<QString, unsigned> > list_of_courses_and_max_members)
 {
-    list<unsigned> sizeList;
-    foreach (list<QString> voteList, listOfVotelists) {
-        sizeList.push_back(voteList.size());
+    list<unsigned> size_list;
+    foreach (list<QString> votelist, list_of_votelists) {
+        size_list.push_back(votelist.size());
     }
-    sizeList.sort();
-    if(*(sizeList.begin()) != *(sizeList.end()) ) {
+    size_list.sort();
+    if(*(size_list.begin()) != *(size_list.end()) ) {
         throw invalid_argument("The votelists need to have equal size");
     }
-    this->listOfVotelists = listOfVotelists;
-    this->listOfCoursesAndMaxMembers = listOfCoursesAndMaxMembers;
-    for (unsigned id = 0; id < *(sizeList.begin()); ++id) {
-            this->listOfVoterIds.push_back(id);
+    this->list_of_votelists = list_of_votelists;
+    this->list_of_courses_and_max_members = list_of_courses_and_max_members;
+    for (unsigned id = 0; id < *(size_list.begin()); ++id) {
+            this->list_of_voter_ids.push_back(id);
     }
 
-    this->matchlist.resize(*(sizeList.begin()) );
+    this->matchlist.resize(*(size_list.begin()) );
 }
 
-void Algorithm::course_matching_algo(){
+void Algorithm::matchCourses(){
 
-    for (unsigned voteRound = 0; voteRound < listOfVotelists.size(); ++voteRound) {
+    for (unsigned vote_round = 0; vote_round < list_of_votelists.size(); ++vote_round) {
 
-        for (unsigned choice = 0; choice < listOfCoursesAndMaxMembers.size(); ++choice) {
+        for (unsigned choice = 0; choice < list_of_courses_and_max_members.size(); ++choice) {
 
-            list<int> courseVoters;
-            list<int>::iterator voterId = listOfVoterIds.begin();
-            for (list<QString>::iterator vote = listOfVotelists[voteRound].begin(); vote != listOfVotelists[voteRound].end(); ++vote) {
-                if (*vote == get<0>(listOfCoursesAndMaxMembers[choice] ) ) {
-                    courseVoters.push_back(*(voterId) );
+            list<int> course_voters;
+            list<int>::iterator voter_id = list_of_voter_ids.begin();
+            for (list<QString>::iterator vote = list_of_votelists[vote_round].begin(); vote != list_of_votelists[vote_round].end(); ++vote) {
+                if (*vote == get<0>(list_of_courses_and_max_members[choice] ) ) {
+                    course_voters.push_back(*(voter_id) );
                 }
-                ++voterId;
+                ++voter_id;
             }
 
-            while (courseVoters.size() > get<1>(listOfCoursesAndMaxMembers[choice] ) ) {
-                list<int>::iterator kickChoice = courseVoters.begin();
+            while (course_voters.size() > get<1>(list_of_courses_and_max_members[choice] ) ) {
+                list<int>::iterator kick_choice = course_voters.begin();
                 srand (time(NULL));
-                advance(kickChoice, rand() % courseVoters.size());
-                courseVoters.erase(kickChoice);
+                advance(kick_choice, rand() % course_voters.size());
+                course_voters.erase(kick_choice);
             }
 
-            get<1>(listOfCoursesAndMaxMembers[choice]) = get<1>(listOfCoursesAndMaxMembers[choice]) - courseVoters.size();
+            get<1>(list_of_courses_and_max_members[choice]) = get<1>(list_of_courses_and_max_members[choice]) - course_voters.size();
 
-            foreach (int voter, courseVoters) {
-                matchlist[voter] = get<0>(listOfCoursesAndMaxMembers[choice]);
+            foreach (int voter, course_voters) {
+                matchlist[voter] = get<0>(list_of_courses_and_max_members[choice]);
 
-                int index = 0;
-                for (list<int>::iterator i = listOfVoterIds.begin(); *(i) != voter || i == listOfVoterIds.end(); ++i) {
-                    ++index;
+                int position_of_voter = 0;
+                for (list<int>::iterator voter_id_pointer = list_of_voter_ids.begin(); *(voter_id_pointer) != voter || voter_id_pointer == list_of_voter_ids.end(); ++voter_id_pointer) {
+                    ++position_of_voter;
                 }
-                listOfVoterIds.remove(voter);
-                foreach (list<QString> voteList, listOfVotelists) {
-                    list<QString>::iterator iter = voteList.begin();
-                    advance(iter, index);
-                    voteList.erase(iter);
+                list_of_voter_ids.remove(voter);
+                foreach (list<QString> votelist, list_of_votelists) {
+                    list<QString>::iterator delete_this = votelist.begin();
+                    advance(delete_this, position_of_voter);
+                    votelist.erase(delete_this);
                 }
             }
         }
     }
 }
 
-vector<QString> Algorithm::get_matchlist(){
+vector<QString> Algorithm::getMatchlist(){
     return matchlist;
 }
