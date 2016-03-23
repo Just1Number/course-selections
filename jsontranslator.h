@@ -13,6 +13,7 @@
 #include <vector>
 #include <list>
 #include <tuple>
+#include "votingdata.h"
 
 using namespace std;
 
@@ -20,11 +21,10 @@ class JsonTranslator
 {
 public:
     JsonTranslator();
+    VotingData getVoteData();
     bool read_file();
 private:
-    vector<list<QString> > list_of_votelists;
-    vector<tuple<QString, unsigned> > list_of_courses_and_max_members;
-    list<int> list_of_voter_ids;
+    VotingData vote_data;
     vector<QString> matchlist;
 };
 

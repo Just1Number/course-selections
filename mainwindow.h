@@ -4,7 +4,6 @@
 #include <QMainWindow>
 #include <QTextBrowser>
 #include <QMessageBox>
-#include "algorithm.h"
 #include "jsontranslator.h"
 #include "votingdata.h"
 
@@ -27,7 +26,6 @@ private:
     Ui::MainWindow *ui;
     QTextBrowser textBrowser;
     QMessageBox msgbox;
-    void sleepcp(int milliseconds);
 };
 
 #endif // MAINWINDOW_H
