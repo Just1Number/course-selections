@@ -1,4 +1,5 @@
 #include "votingdata.h"
+#include <string>
 
 VotingData::VotingData()
 {
@@ -45,7 +46,10 @@ void VotingData::setListOfCoursesAndMaxMembers(vector<tuple<QString, unsigned> >
         tuple<QString, unsigned> course = list_of_courses_and_max_members[course_index];
         QString course_name = get<0>(course);
         if(course_name.isEmpty()){
-            throw invalid_argument("A course has no name"); //TODO: Add course_index to error message
+            string exception_msg = "Course number ";
+            exception_msg.append(to_string(course_index));
+            exception_msg.append(" has no name");
+            throw invalid_argument(exception_msg);
         }
     }
 
