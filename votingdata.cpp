@@ -1,6 +1,10 @@
 #include "votingdata.h"
 #include <string>
 
+/**
+ * @brief VotingData::VotingData
+ * The constructor initializes all attributes of the class, to prevent a segemtation fault
+ */
 VotingData::VotingData()
 {
     vector<tuple<QString, unsigned> > tuple_vector;
@@ -13,22 +17,43 @@ VotingData::VotingData()
     this->list_of_votelists = list_vector;
 }
 
+/**
+ * @brief VotingData::listOfVotelists
+ * @return list_of_votelists
+ */
 vector<list<QString> > VotingData::listOfVotelists(){
     return this->list_of_votelists;
 }
 
+/**
+ * @brief VotingData::listOfCoursesAndMaxMembers
+ * @return list_of_courses_and_max_members
+ */
 vector<tuple<QString, unsigned> > VotingData::listOfCoursesAndMaxMembers(){
     return this->list_of_courses_and_max_members;
 }
 
+/**
+ * @brief VotingData::listOfVoterIds
+ * @return list_of_voter_ids
+ */
 list<int> VotingData::listOfVoterIds(){
     return this->list_of_voter_ids;
 }
 
+/**
+ * @brief VotingData::matchlist
+ * @return _matchlist
+ */
 vector<QString> VotingData::matchlist(){
     return this->_matchlist;
 }
 
+/**
+ * @brief VotingData::setListOfVotelists
+ * @param list_of_votelists
+ * @throw invalid_argument - if the lists don't have equal size
+ */
 void VotingData::setListOfVotelists(vector<list<QString> > list_of_votelists){
     // Testing if all votelist have the same size.
     unsigned size = 0;
@@ -41,6 +66,11 @@ void VotingData::setListOfVotelists(vector<list<QString> > list_of_votelists){
     this->list_of_votelists = list_of_votelists;
 }
 
+/**
+ * @brief VotingData::setListOfCoursesAndMaxMembers
+ * @param list_of_courses_and_max_members
+ * @throw invalid_argument - if a course has an empty QString as a name
+ */
 void VotingData::setListOfCoursesAndMaxMembers(vector<tuple<QString, unsigned> > list_of_courses_and_max_members){
     for (unsigned course_index = 0; course_index < list_of_courses_and_max_members.size(); ++course_index) {
         tuple<QString, unsigned> course = list_of_courses_and_max_members[course_index];
@@ -56,14 +86,27 @@ void VotingData::setListOfCoursesAndMaxMembers(vector<tuple<QString, unsigned> >
     this->list_of_courses_and_max_members = list_of_courses_and_max_members;
 }
 
+/**
+ * @brief VotingData::setListOfVoterIds
+ * @param list_of_voter_ids
+ */
 void VotingData::setListOfVoterIds(list<int> list_of_voter_ids){
     this->list_of_voter_ids = list_of_voter_ids;
 }
 
+/**
+ * @brief VotingData::setMatchlist
+ * @param matchlist
+ */
 void VotingData::setMatchlist(vector<QString> matchlist){
     this->_matchlist = matchlist;
 }
 
+/**
+ * @brief VotingData::matchCourses
+ * @return true if successful - false if not
+ * Whenever the function fails a MessageBox opens with an appropriate error message. At the end courses_matched is set true.
+ */
 bool VotingData::matchCourses(){
 
     if(courses_matched){
@@ -80,34 +123,39 @@ bool VotingData::matchCourses(){
         return false;
     }
 
+    // Fill list_of_voter_ids
     for (unsigned id = 0; id < list_of_votelists[0].size(); ++id) {
             this->list_of_voter_ids.push_back(id);
     }
 
     for (unsigned vote_round = 0; vote_round < list_of_votelists.size(); ++vote_round) {
 
-        for (unsigned choice = 0; choice < list_of_courses_and_max_members.size(); ++choice) {
+        for (unsigned course_index = 0; course_index < list_of_courses_and_max_members.size(); ++course_index) {
 
             list<int> course_voters;
             list<int>::iterator voter_id = list_of_voter_ids.begin();
             for (list<QString>::iterator vote = list_of_votelists[vote_round].begin(); vote != list_of_votelists[vote_round].end(); ++vote) {
-                if (*vote == get<0>(list_of_courses_and_max_members[choice] ) ) {
+                // check every vote whether it matches the currently covered course and put it in course_voters if it does
+                if (*vote == get<0>(list_of_courses_and_max_members[course_index] ) ) {
                     course_voters.push_back(*(voter_id) );
                 }
                 ++voter_id;
             }
 
-            while (course_voters.size() > get<1>(list_of_courses_and_max_members[choice] ) ) {
+            // kick random votes from course_voters if there are more votes than allowed members
+            while (course_voters.size() > get<1>(list_of_courses_and_max_members[course_index] ) ) {
                 list<int>::iterator kick_choice = course_voters.begin();
                 srand (time(NULL));
                 advance(kick_choice, rand() % course_voters.size());
                 course_voters.erase(kick_choice);
             }
 
-            get<1>(list_of_courses_and_max_members[choice]) = get<1>(list_of_courses_and_max_members[choice]) - course_voters.size();
+            // subtract the number of assigned votes from the max members
+            get<1>(list_of_courses_and_max_members[course_index]) = get<1>(list_of_courses_and_max_members[course_index]) - course_voters.size();
 
+            // save assigned votes in _matchlist and delete voters from other lists
             foreach (int voter, course_voters) {
-                _matchlist[voter] = get<0>(list_of_courses_and_max_members[choice]);
+                _matchlist[voter] = get<0>(list_of_courses_and_max_members[course_index]);
 
                 int position_of_voter = 0;
                 for (list<int>::iterator voter_id_pointer = list_of_voter_ids.begin(); *(voter_id_pointer) != voter || voter_id_pointer == list_of_voter_ids.end(); ++voter_id_pointer) {
